@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Portal - Multi Language</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://image2url.com/images/1757776873393-9725a06b-4cda-4109-9e52-ce3f241c33e3.jpeg");
+      background-size: cover;
+      background-position: center;
+      color: #333;
+    }
+    .container {
+      width: 400px;
+      margin: 5% auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    label { font-weight: bold; }
+    input, select {
+      width: 100%; padding: 10px; margin: 8px 0;
+      border: 1px solid #ccc; border-radius: 8px;
+    }
+    button {
+      width: 100%; padding: 12px;
+      background: green; color: white; font-size: 16px;
+      border: none; border-radius: 8px; cursor: pointer;
+    }
+    button:hover { background: darkgreen; }
+    .toggle { text-align: center; margin-top: 15px; }
+    .toggle a { color: green; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="registerBox">
+    <h2 id="title">🌾 Farmer Registration</h2>
+    
+    <select id="language" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="bn">বাংলা</option>
+      <option value="gu">ગુજરાતી</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="ml">മലയാളം</option>
+      <option value="mr">मराठी</option>
+      <option value="or">ଓଡିଆ</option>
+      <option value="pa">ਪੰਜਾਬੀ</option>
+      <option value="ta">தமிழ்</option>
+      <option value="te">తెలుగు</option>
+      <option value="ur">اردو</option>
+      <option value="as">অসমীয়া</option>
+      <option value="ks">کٲشُر</option>
+      <option value="kok">कोंकणी</option>
+      <option value="mai">मैथिली</option>
+      <option value="ne">नेपाली</option>
+      <option value="sa">संस्कृत</option>
+      <option value="sd">سنڌي</option>
+      <option value="doi">डोगरी</option>
+      <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ (Santali)</option>
+      <option value="mni">ꯃꯩꯇꯩ (Manipuri)</option>
+      <option value="brx">बर' (Bodo)</option>
+    </select>
+
+    <form>
+      <label id="nameLbl">👤 Name</label>
+      <input type="text" placeholder="Enter your name" required>
+
+      <label id="mobileLbl">📱 Mobile Number</label>
+      <input type="tel" placeholder="Enter mobile number" required>
+
+      <label id="otpLbl">🔑 OTP</label>
+      <input type="text" placeholder="Enter OTP">
+
+      <label id="emailLbl">📧 Email (Optional)</label>
+      <input type="email" placeholder="Enter email">
+
+      <button type="submit" id="registerBtn">Register</button>
+    </form>
+
+    <div class="toggle">
+      <span id="loginText">Already have an account?</span>
+      <a href="#" onclick="toggleForm()" id="loginLink">Login here</a>
+    </div>
+  </div>
+
+  <div class="container" id="loginBox" style="display:none;">
+    <h2 id="loginTitle">🌾 Farmer Login</h2>
+
+    <form>
+      <label id="mobileLblLogin">📱 Mobile Number</label>
+      <input type="tel" placeholder="Enter mobile number" required>
+
+      <label id="otpLblLogin">🔑 OTP</label>
+      <input type="text" placeholder="Enter OTP">
+
+      <button type="submit" id="loginBtn">Login</button>
+    </form>
+
+    <div class="toggle">
+      <span id="registerText">Don’t have an account?</span>
+      <a href="#" onclick="toggleForm()" id="registerLink">Register here</a>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      en: { title:"🌾 Farmer Registration", name:"👤 Name", mobile:"📱 Mobile Number", otp:"🔑 OTP", email:"📧 Email (Optional)", register:"Register", loginText:"Already have an account?", loginLink:"Login here", loginTitle:"🌾 Farmer Login", loginBtn:"Login", registerText:"Don’t have an account?", registerLink:"Register here" },
+      hi: { title:"🌾 किसान पंजीकरण", name:"👤 नाम", mobile:"📱 मोबाइल नंबर", otp:"🔑 ओटीपी", email:"📧 ईमेल (वैकल्पिक)", register:"पंजीकरण करें", loginText:"पहले से खाता है?", loginLink:"लॉगिन करें", loginTitle:"🌾 किसान लॉगिन", loginBtn:"लॉगिन", registerText:"खाता नहीं है?", registerLink:"पंजीकरण करें" },
+      bn: { title:"🌾 কৃষক নিবন্ধন", name:"👤 নাম", mobile:"📱 মোবাইল নম্বর", otp:"🔑 ওটিপি", email:"📧 ইমেইল (ঐচ্ছিক)", register:"নিবন্ধন", loginText:"আগে থেকেই অ্যাকাউন্ট আছে?", loginLink:"লগইন করুন", loginTitle:"🌾 কৃষক লগইন", loginBtn:"লগইন", registerText:"অ্যাকাউন্ট নেই?", registerLink:"নিবন্ধন করুন" },
+      gu: { title:"🌾 ખેડૂત નોંધણી", name:"👤 નામ", mobile:"📱 મોબાઇલ નંબર", otp:"🔑 ઓટિપિ", email:"📧 ઇમેઇલ (વૈકલ્પિક)", register:"નોંધણી કરો", loginText:"પહેલેથી એકાઉન્ટ છે?", loginLink:"લૉગિન કરો", loginTitle:"🌾 ખેડૂત લૉગિન", loginBtn:"લૉગિન", registerText:"એકાઉન્ટ નથી?", registerLink:"નોંધણી કરો" },
+      kn: { title:"🌾 ರೈತ ನೋಂದಣಿ", name:"👤 ಹೆಸರು", mobile:"📱 ಮೊಬೈಲ್ ಸಂಖ್ಯೆ", otp:"🔑 ಒಟಿಪಿ", email:"📧 ಇಮೇಲ್ (ಐಚ್ಛಿಕ)", register:"ನೋಂದಣಿ", loginText:"ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?", loginLink:"ಲಾಗಿನ್ ಮಾಡಿ", loginTitle:"🌾 ರೈತ ಲಾಗಿನ್", loginBtn:"ಲಾಗಿನ್", registerText:"ಖಾತೆ ಇಲ್ಲವೇ?", registerLink:"ನೋಂದಣಿ ಮಾಡಿ" },
+      ml: { title:"🌾 കർഷക രജിസ്ട്രേഷൻ", name:"👤 പേര്", mobile:"📱 മൊബൈൽ നമ്പർ", otp:"🔑 ഒടിപി", email:"📧 ഇമെയിൽ (ഐച്ഛികം)", register:"രജിസ്റ്റർ ചെയ്യുക", loginText:"അക്കൗണ്ട് ഉണ്ടോ?", loginLink:"ലോഗിൻ ചെയ്യുക", loginTitle:"🌾 കർഷകൻ ലോഗിൻ", loginBtn:"ലോഗിൻ", registerText:"അക്കൗണ്ട് ഇല്ലേ?", registerLink:"രജിസ്റ്റർ ചെയ്യുക" },
+      mr: { title:"🌾 शेतकरी नोंदणी", name:"👤 नाव", mobile:"📱 मोबाईल क्रमांक", otp:"🔑 ओटीपी", email:"📧 ईमेल (ऐच्छिक)", register:"नोंदणी करा", loginText:"आधीच खाते आहे?", loginLink:"लॉगिन करा", loginTitle:"🌾 शेतकरी लॉगिन", loginBtn:"लॉगिन", registerText:"खाते नाही?", registerLink:"नोंदणी करा" },
+      or: { title:"🌾 କୃଷକ ନିବନ୍ଧନ", name:"👤 ନାମ", mobile:"📱 ମୋବାଇଲ୍ ନମ୍ବର", otp:"🔑 OTP", email:"📧 ଇମେଲ୍ (ଇଚ୍ଛାଧୀନ)", register:"ନିବନ୍ଧନ କରନ୍ତୁ", loginText:"ଖାତା ଅଛି?", loginLink:"ଲଗଇନ କରନ୍ତୁ", loginTitle:"🌾 କୃଷକ ଲଗଇନ", loginBtn:"ଲଗଇନ", registerText:"ଖାତା ନାହିଁ?", registerLink:"ନିବନ୍ଧନ କରନ୍ତୁ" },
+      pa: { title:"🌾 ਕਿਸਾਨ ਰਜਿਸਟ੍ਰੇਸ਼ਨ", name:"👤 ਨਾਮ", mobile:"📱 ਮੋਬਾਈਲ ਨੰਬਰ", otp:"🔑 ਓਟੀਪੀ", email:"📧 ਈਮੇਲ (ਵਿਕਲਪਿਕ)", register:"ਰਜਿਸਟਰ ਕਰੋ", loginText:"ਪਹਿਲਾਂ ਹੀ ਖਾਤਾ ਹੈ?", loginLink:"ਲੌਗਇਨ ਕਰੋ", loginTitle:"🌾 ਕਿਸਾਨ ਲੌਗਇਨ", loginBtn:"ਲੌਗਇਨ", registerText:"ਖਾਤਾ ਨਹੀਂ?", registerLink:"ਰਜਿਸਟਰ ਕਰੋ" },
+      ta: { title:"🌾 விவசாயி பதிவு", name:"👤 பெயர்", mobile:"📱 கைபேசி எண்", otp:"🔑 OTP", email:"📧 மின்னஞ்சல் (விருப்பம்)", register:"பதிவு செய்க", loginText:"ஏற்கனவே கணக்கு உள்ளதா?", loginLink:"உள்நுழைய", loginTitle:"🌾 விவசாயி உள்நுழைவு", loginBtn:"உள்நுழைவு", registerText:"கணக்கு இல்லையா?", registerLink:"பதிவு செய்க" },
+      te: { title:"🌾 రైతు నమోదు", name:"👤 పేరు", mobile:"📱 మొబైల్ నంబర్", otp:"🔑 OTP", email:"📧 ఇమెయిల్ (ఐచ్చికం)", register:"నమోదు చేయండి", loginText:"ఇప్పటికే ఖాతా ఉందా?", loginLink:"లాగిన్ చేయండి", loginTitle:"🌾 రైతు లాగిన్", loginBtn:"లాగిన్", registerText:"ఖాతా లేదా?", registerLink:"నమోదు చేయండి" },
+      ur: { title:"🌾 کسان رجسٹریشن", name:"👤 نام", mobile:"📱 موبائل نمبر", otp:"🔑 او ٹی پی", email:"📧 ای میل (اختیاری)", register:"رجسٹر کریں", loginText:"پہلے سے اکاؤنٹ ہے؟", loginLink:"لاگ ان کریں", loginTitle:"🌾 کسان لاگ ان", loginBtn:"لاگ ان", registerText:"اکاؤنٹ نہیں ہے؟", registerLink:"رجسٹر کریں" },
+      as: { title:"🌾 কৃষক পঞ্জীয়ন", name:"👤 নাম", mobile:"📱 মবাইল নম্বৰ", otp:"🔑 OTP", email:"📧 ইমেইল (ঐচ্ছিক)", register:"পঞ্জীয়ন কৰক", loginText:"আগতেই একাউণ্ট আছে?", loginLink:"লগইন কৰক", loginTitle:"🌾 কৃষক লগইন", loginBtn:"লগইন", registerText:"একাউণ্ট নাই?", registerLink:"পঞ্জীয়ন কৰক" },
+      ks: { title:"🌾 كسان رجسٽريشن", name:"👤 ناو", mobile:"📱 موبائل نمر", otp:"🔑 OTP", email:"📧 ای میل (اختیاری)", register:"رجسٹر کرٲیو", loginText:"پہلے ہی کھاتہ ہٲے؟", loginLink:"لاگ ان کرٲیو", loginTitle:"🌾 كسان لاگ ان", loginBtn:"لاگ ان", registerText:"کھاتہ نہ ہٲے؟", registerLink:"رجسٹر کرٲیو" },
+      kok: { title:"🌾 शेतकरी नोंदणी (कोंकणी)", name:"👤 नांव", mobile:"📱 मोबाईल नंबर", otp:"🔑 ओटीपी", email:"📧 ईमेल (ऑप्शनल)", register:"नोंदणी", loginText:"आयत खाते आसा?", loginLink:"लॉगिन", loginTitle:"🌾 शेतकरी लॉगिन", loginBtn:"लॉगिन", registerText:"खाते ना?", registerLink:"नोंदणी" },
+      mai: { title:"🌾 किसान पंजीयन (मैथिली)", name:"👤 नाम", mobile:"📱 मोबाइल नंबर", otp:"🔑 ओटीपी", email:"📧 ईमेल (वैकल्पिक)", register:"पंजीयन करू", loginText:"पहिने सँ खाता अछि?", loginLink:"लॉगिन करू", loginTitle:"🌾 किसान लॉगिन", loginBtn:"लॉगिन", registerText:"खाता नहि अछि?", registerLink:"पंजीयन करू" },
+      ne: { title:"🌾 किसान दर्ता (नेपाली)", name:"👤 नाम", mobile:"📱 मोबाइल नम्बर", otp:"🔑 OTP", email:"📧 इमेल (ऐच्छिक)", register:"दर्ता गर्नुहोस्", loginText:"पहिले नै खाता छ?", loginLink:"लगइन गर्नुहोस्", loginTitle:"🌾 किसान लगइन", loginBtn:"लगइन", registerText:"खाता छैन?", registerLink:"दर्ता गर्नुहोस्" },
+      sa: { title:"🌾 कृषक पञ्जीकरण (संस्कृत)", name:"👤 नाम", mobile:"📱 चलनसङ्ख्या", otp:"🔑 ओटीपी", email:"📧 ईमेल (वैकल्पिक)", register:"पञ्जीकरणं कुरुत", loginText:"पूर्वमे खाता अस्ति?", loginLink:"प्रविशतु", loginTitle:"🌾 कृषक प्रवेशः", loginBtn:"प्रविशतु", registerText:"खाता नास्ति?", registerLink:"पञ्जीकरणं कुरुत" },
+      sd: { title:"🌾 هارين جي رجسٽريشن (سنڌي)", name:"👤 نالو", mobile:"📱 موبائل نمبر", otp:"🔑 OTP", email:"📧 اي ميل (اختياري)", register:"رجسٽر ڪريو", loginText:"اڳ ئي اڪائونٽ آهي؟", loginLink:"لاگ ان ڪريو", loginTitle:"🌾 هارين لاگ ان", loginBtn:"لاگ ان", registerText:"اڪائونٽ ناهي؟", registerLink:"رجسٽر ڪريو" },
+      doi: { title:"🌾 किसान पंजीकरण (डोगरी)", name:"👤 नां", mobile:"📱 मोबाइल नंबर", otp:"🔑 ओटीपी", email:"📧 ईमेल (वैकल्पिक)", register:"पंजीकरण करो", loginText:"पहले खाता है?", loginLink:"लॉगिन करो", loginTitle:"🌾 किसान लॉगिन", loginBtn:"लॉगिन", registerText:"खाता नहीं?", registerLink:"पंजीकरण करो" },
+      sat: { title:"🌾 ᱠᱤᱥᱟᱱ ᱯᱟᱱᱡᱤᱭᱟᱱ (Santali)", name:"👤 ᱧᱩᱛᱩᱢ", mobile:"📱 ᱢᱳᱵᱟᱭᱞ ᱧᱟᱢᱚᱨ", otp:"🔑 OTP", email:"📧 ᱤᱢᱮᱞ (ᱟᱭᱪᱷᱤᱠ)", register:"ᱯᱟᱱᱡᱤᱭᱟᱱ", loginText:"ᱯᱟᱭᱞᱟ ᱡᱷᱤ ᱠᱷᱟᱛᱟ?", loginLink:"ᱞᱚᱜᱤᱱ", loginTitle:"🌾 ᱠᱤᱥᱟᱱ ᱞᱚᱜᱤᱱ", loginBtn:"ᱞᱚᱜᱤᱱ", registerText:"ᱠᱷᱟᱛᱟ ᱵᱟᱝ?", registerLink:"ᱯᱟᱱᱡᱤᱭᱟᱱ" },
+      mni: { title:"🌾 ꯀꯤꯁꯥꯟ ꯔꯦꯖꯤꯁ꯭ꯇ꯭ꯔꯦꯁꯟ (Manipuri)", name:"👤 ꯃꯃꯤꯛ", mobile:"📱 ꯃꯣꯕꯥꯏꯜ ꯃꯅꯤꯡ", otp:"🔑 OTP", email:"📧 ꯏꯃꯦꯜ (ꯑꯇꯣꯞꯄꯤꯜ)", register:"ꯔꯦꯖꯤꯁ꯭ꯇ꯭ꯔꯦꯁꯟ", loginText:"ꯑꯩꯈꯣꯡ ꯍꯥꯡꯅꯃꯛ ꯀꯤꯌꯥ?", loginLink:"ꯂꯥꯒꯤꯟ", loginTitle:"🌾 ꯀꯤꯁꯥꯟ ꯂꯥꯒꯤꯟ", loginBtn:"ꯂꯥꯒꯤꯟ", registerText:"ꯀꯤꯌꯥ ꯅꯍꯥꯡꯍꯤ?", registerLink:"ꯔꯦꯖꯤꯁ꯭ꯇ꯭ꯔꯦꯁꯟ" },
+      brx: { title:"🌾 बोर' खाथा (Bodo)", name:"👤 मुं", mobile:"📱 मोबाइल नम्बार", otp:"🔑 OTP", email:"📧 इमेल (Optional)", register:"खाथा हो", loginText:"आगोआग' खाथा दं?", loginLink:"लॉगिन", loginTitle:"🌾 बोर' लॉगिन", loginBtn:"लॉगिन", registerText:"खाथा नों?", registerLink:"खाथा हो" }
+    };
+
+    function changeLanguage() {
+      let lang = document.getElementById("language").value;
+      let t = translations[lang];
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("nameLbl").innerText = t.name;
+      document.getElementById("mobileLbl").innerText = t.mobile;
+      document.getElementById("otpLbl").innerText = t.otp;
+      document.getElementById("emailLbl").innerText = t.email;
+      document.getElementById("registerBtn").innerText = t.register;
+      document.getElementById("loginText").innerText = t.loginText;
+      document.getElementById("loginLink").innerText = t.loginLink;
+      document.getElementById("loginTitle").innerText = t.loginTitle;
+      document.getElementById("loginBtn").innerText = t.loginBtn;
+      document.getElementById("registerText").innerText = t.registerText;
+      document.getElementById("registerLink").innerText = t.registerLink;
+      document.getElementById("mobileLblLogin").innerText = t.mobile;
+      document.getElementById("otpLblLogin").innerText = t.otp;
+    }
+
+    function toggleForm() {
+      let reg = document.getElementById("registerBox");
+      let log = document.getElementById("loginBox");
+      if (reg.style.display === "none") {
+        reg.style.display = "block";
+        log.style.display = "none";
+      } else {
+        reg.style.display = "none";
+        log.style.display = "block";
+      }
+    }
+  </script>
+
+</body>
+</html>
